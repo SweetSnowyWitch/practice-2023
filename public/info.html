@@ -2,15 +2,100 @@
 <html lang="ru">
 
 <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="info.css" />
     <title>
-        Helow word!
+        Макет истории посещений
     </title>
 </head>
 
 <body>
-    <h1>
-        World hewwowd!
-    </h1>
+    <div class="page-wrapper">
+        <header class="main-header">
+            <h1>Logo</h1>
+        </header>
+        <div class="main-wrapper">
+            <div class="content">
+                <div class="search">
+                    <p>Список событий</p>
+                    <div class="search-content">
+                        <input class="search-field" type="search" name="search" id="site-search"
+                            placeholder="Поиск..." />
+                        <div class="date-content">
+                            <p>Дата с</p>
+                            <input class="date-field" type="date" name="date-start" id="start" />
+                            <p>по</p>
+                            <input class="date-field" type="date" name="date-end" id="end" />
+                        </div>
+                        <select class="select-event-field" name="select-event" id="site-select-event">
+                            <option value="">Выберите событие</option>
+                            <option value="1">Выберите событие 2</option>
+                        </select>
+                        <select class="select-event-count-field" name="event-count" id="site-event-count">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                        </select>
+                        <button class="button-reset">Сбросить</button>
+                    </div>
+                    <div class="downloads-content">
+                        <button class="button-download-data">Выгрузить данные</button>
+                        <button class="button-download-errors">Выгрузить ошибки</button>
+                    </div>
+                </div>
+                <main class="events">
+                    <table class="events-field">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">
+                                    Имя
+                                    <img class="sort-up" src="" />
+                                    <img class="sort-down" src="" />
+                                </th>
+                                <th scope="col">
+                                    Логин
+                                    <img class="sort-up" src="" />
+                                    <img class="sort-down" src="" />
+                                </th>
+                                <th scope="col">
+                                    Время
+                                    <img class="sort-up" src="" />
+                                    <img class="sort-down" src="" />
+                                </th>
+                                <th scope="col">
+                                    Тип события
+                                    <img class="sort-up" src="" />
+                                    <img class="sort-down" src="" />
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="event-pic"><img class="event-pic" src="http://placehold.it/60x80" alt="image" /></td>
+                                <td id="event-name">name</td>
+                                <td id="event-login">login</td>
+                                <td id="event-date">date</td>
+                                <td id="event-type">type</td>
+                            </tr>
+                            <tr>
+                                <td id="event-pic"><img class="event-pic" src="http://placehold.it/60x80" alt="image" /></td>
+                                <td id="event-name">name 2</td>
+                                <td id="event-login">login 2</td>
+                                <td id="event-date">date 2</td>
+                                <td id="event-type">type 2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </main>
+                <div class="pages">
+                    <p>test 5</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
