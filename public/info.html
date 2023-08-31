@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
+<html><head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="info.css" />
+    <link rel="stylesheet" href="info.css">
+    <script src="script.js"></script>
     <title>
         Макет истории посещений
     </title>
 </head>
 
-<body>
+<body onload="renderRows(null,null)">
     <div class="page-wrapper">
         <header class="main-header">
             <h1>Logo</h1>
@@ -19,83 +17,153 @@
                 <div class="search">
                     <p>Список событий</p>
                     <div class="search-content">
-                        <input class="search-field" type="search" name="search" id="site-search"
-                            placeholder="Поиск..." />
+                        <input class="search-field" type="search" id="site-search" placeholder="Поиск..." onchange="renderRows()">
                         <div class="date-content">
                             <p>Дата с</p>
-                            <input class="date-field" type="date" name="date-start" id="start" />
+                            <input class="date-field" type="datetime-local" id="date-start" onchange="renderRows(null,null)">
                             <p>по</p>
-                            <input class="date-field" type="date" name="date-end" id="end" />
+                            <input class="date-field" type="datetime-local" id="date-end" onchange="renderRows(null,null)">
                         </div>
-                        <select class="select-event-field" name="select-event" id="site-select-event">
+                        <select class="select-event-field" id="site-select-event" onchange="renderRows(null,null)">
                             <option value="">Выберите событие</option>
-                            <option value="1">Выберите событие 2</option>
+                            <option value="Успешный вход">Успешный вход</option>
+                            <option value="Лицо не найдено">Лицо не найдено</option>
                         </select>
-                        <select class="select-event-count-field" name="event-count" id="site-event-count">
+                        <select class="select-event-count-field" id="site-event-count" onchange="renderRows(null,null)">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
                             <option value="200">200</option>
                         </select>
-                        <button class="button-reset">Сбросить</button>
-                    </div>
-                    <div class="downloads-content">
-                        <button class="button-download-data">Выгрузить данные</button>
-                        <button class="button-download-errors">Выгрузить ошибки</button>
+                        <button class="button-reset" onclick="resetSearch()">Сбросить</button>
                     </div>
                 </div>
                 <main class="events">
-                    <table class="events-field">
+                    <table class="events-field" id="events-table">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">
                                     Имя
-                                    <img class="sort-up" src="" />
-                                    <img class="sort-down" src="" />
+                                    <button class="sort-up" onclick="renderRows('name',true)"></button>
+                                    <button class="sort-down" onclick="renderRows('name',false)"></button>
                                 </th>
                                 <th scope="col">
                                     Логин
-                                    <img class="sort-up" src="" />
-                                    <img class="sort-down" src="" />
+                                    <button class="sort-up" onclick="renderRows('login',true)"></button>
+                                    <button class="sort-down" onclick="renderRows('login',false)"></button>
                                 </th>
                                 <th scope="col">
                                     Время
-                                    <img class="sort-up" src="" />
-                                    <img class="sort-down" src="" />
+                                    <button class="sort-up" onclick="renderRows('date',true)"></button>
+                                    <button class="sort-down" onclick="renderRows('date',false)"></button>
                                 </th>
                                 <th scope="col">
                                     Тип события
-                                    <img class="sort-up" src="" />
-                                    <img class="sort-down" src="" />
+                                    <button class="sort-up" onclick="renderRows('type',true)"></button>
+                                    <button class="sort-down" onclick="renderRows('type',false)"></button>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td id="event-pic"><img class="event-pic" src="http://placehold.it/60x80" alt="image" /></td>
-                                <td id="event-name">name</td>
-                                <td id="event-login">login</td>
-                                <td id="event-date">date</td>
-                                <td id="event-type">type</td>
-                            </tr>
-                            <tr>
-                                <td id="event-pic"><img class="event-pic" src="http://placehold.it/60x80" alt="image" /></td>
-                                <td id="event-name">name 2</td>
-                                <td id="event-login">login 2</td>
-                                <td id="event-date">date 2</td>
-                                <td id="event-type">type 2</td>
-                            </tr>
-                        </tbody>
+                        <tbody><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Новикова Анна Сергеевна</td>
+											<td id="event-login">novikova_anna@mail.com</td>
+											<td id="event-date">Tue Oct 25 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Макаров Даниил Владимирович</td>
+											<td id="event-login">makarov_daniil@mail.com</td>
+											<td id="event-date">Mon Oct 24 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Киселев Максим Александрович</td>
+											<td id="event-login">kiselev_maxim@mail.com</td>
+											<td id="event-date">Sun Oct 23 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Гаврилов Сергей Петрович</td>
+											<td id="event-login">gavrilov_sergey@mail.com</td>
+											<td id="event-date">Sat Oct 22 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Белова Елена Игоревна</td>
+											<td id="event-login">belova_elena@mail.com</td>
+											<td id="event-date">Fri Oct 21 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Романов Александр Сергеевич</td>
+											<td id="event-login">romanov_alexander@mail.com</td>
+											<td id="event-date">Thu Oct 20 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">#no_face</td>
+											<td id="event-login">#no_face</td>
+											<td id="event-date">Thu Oct 01 2020 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Лицо не найдено</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Кузьмина Мария Васильевна</td>
+											<td id="event-login">kuzmina_maria@mail.com</td>
+											<td id="event-date">Sun Oct 16 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Яковлев Игорь Андреевич</td>
+											<td id="event-login">yakovlev_igor@mail.com</td>
+											<td id="event-date">Sun Oct 16 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Соколов Алексей Викторович</td>
+											<td id="event-login">sokolov_aleksey@mail.com</td>
+											<td id="event-date">Sun Oct 16 2022 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Федоров Артем Сергеевич</td>
+											<td id="event-login">fedorov_artem@mail.com</td>
+											<td id="event-date">Sun Oct 11 2020 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr><tr style="display: none;">
+											<td id="event-pic"><img class="event-pic-placeholder"></td>
+											<td id="event-name">Андреев Андрей Андреевич</td>
+											<td id="event-login">andreev_andrey@mail.com</td>
+											<td id="event-date">Mon Oct 12 2020 09:42:38 GMT+0500 (Екатеринбург, стандартное время)</td>
+											<td id="event-type">Успешный вход</td>
+										</tr></tbody>
                     </table>
                 </main>
-                <div class="pages">
-                    <p>test 5</p>
+                <div class="pagination-wrapper">
+                    <p class="pager" id="page-no" style="display: none;">1</p>
+                    <div class="pagination-field">
+						<button class="skip-backward-double" onclick="changePage(1,2)"></button>
+						<button class="skip-backward" onclick="changePage(0,2)"></button>
+						<p class="pager">1/2</p>
+						<button class="skip-forward" onclick="changePage(2,2)"></button>
+						<button class="skip-forward-double" onclick="changePage(2,2)"></button>
+					</div>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
-</html>
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

@@ -4,6 +4,17 @@
     box-sizing: border-box;
 }
 
+button {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    text-align: inherit;
+    font: inherit;
+    border-radius: 0;
+    appearance: none;
+}
+
 .page-wrapper {
     width: 100%;
     color-scheme: dark;
@@ -167,7 +178,17 @@ select {
     align-items: center;
     flex: 1 0 0;
     border-radius: 0.3125rem;
+    font-family: sans-serif;
+    color: var(--text-light, #FFF);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     background: var(--green, #1BAA8F);
+}
+
+.button-reset:active {
+    background: var(--dark-green, #0E6F5C);
 }
 
 .downloads-content {
@@ -176,6 +197,7 @@ select {
     align-items: center;
     gap: 1.25rem;
     align-self: stretch;
+    font-family: sans-serif;
 }
 
 .button-download-data {
@@ -186,6 +208,16 @@ select {
     gap: 0.9375rem;
     border-radius: 0.3125rem;
     background: var(--green, #1BAA8F);
+    font-family: sans-serif;
+    color: var(--text-light, #FFF);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button-download-data:active {
+    background: var(--dark-green, #0E6F5C);
 }
 
 .button-download-errors {
@@ -196,6 +228,16 @@ select {
     gap: 0.9375rem;
     border-radius: 0.3125rem;
     background: var(--red, #FE0062);
+    font-family: sans-serif;
+    color: var(--text-light, #FFF);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button-download-errors:active {
+    background: var(--dark-red, #B01D55);
 }
 
 .events {
@@ -214,24 +256,26 @@ select {
     border-collapse: collapse;
     align-items: center;
     justify-content: right;
-}
-
-thead {
     color: var(--text-light, #FFF);
     font-family: sans-serif;
     font-size: 0.75rem;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     line-height: normal;
+}
+
+thead {
+    font-weight: 600;
 }
 
 tr {
     height: 3.8125rem;
 }
 
-th,td {
+th,
+td {
     border-bottom: 1px solid var(--light-gray, #333);
-    align-items: left;    
+    align-items: left;
     padding: 0.625rem 0.625rem;
 }
 
@@ -240,10 +284,20 @@ th,td {
     width: 60px;
 }
 
+.event-pic-placeholder {
+    height: 80px;
+    width: 60px;
+    background-image: url(/static/media/placeholder.png);
+}
+
 .sort-up {
     width: 9px;
     height: 15px;
     background-image: url(/static/media/icon-arrow-up-dark-gray.svg);
+}
+
+.sort-up:active {
+    background-image: url(/static/media/icon-arrow-up-light-gray.svg);
 }
 
 .sort-down {
@@ -252,10 +306,73 @@ th,td {
     background-image: url(/static/media/icon-arrow-down-dark-gray.svg);
 }
 
-.pages {
+.sort-down:active {
+    background-image: url(/static/media/icon-arrow-down-light-gray.svg);
+}
+
+.pagination-wrapper {
     display: flex;
-    padding: 15px 25px 30px 25px;
+    padding: 0.9375rem 1.5625rem 1.875rem 1.5625rem;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 0rem;
+}
+
+.pagination-field {
+    display: flex;
+    align-items: center;
+}
+
+.pager {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 0rem 0.375rem;
+    color: var(--button-text-dark, #656565);
+    background: #1F1F1F;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.skip-backward-double {
+    width: 30px;
+    height: 30px;
+    background-image: url(/static/media/icon-skip-backward-double-gray-inactive.svg);
+}
+
+.skip-backward-double:active {
+    background-image: url(/static/media/icon-skip-backward-double-gray-active.svg);
+}
+
+.skip-backward {
+    width: 30px;
+    height: 30px;
+    background-image: url(/static/media/icon-skip-backward-gray-inactive.svg);
+}
+
+.skip-backward:active {
+    background-image: url(/static/media/icon-skip-backward-gray-active.svg);
+}
+
+.skip-forward-double {
+    width: 30px;
+    height: 30px;
+    background-image: url(/static/media/icon-skip-forward-double-gray-inactive.svg);
+}
+
+.skip-forward-double:active {
+    background-image: url(/static/media/icon-skip-forward-double-gray-active.svg);
+}
+
+.skip-forward {
+    width: 30px;
+    height: 30px;
+    background-image: url(/static/media/icon-skip-forward-gray-inactive.svg);
+}
+
+.skip-forward:active {
+    background-image: url(/static/media/icon-skip-forward-gray-active.svg);
 }
